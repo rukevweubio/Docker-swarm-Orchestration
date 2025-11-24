@@ -55,9 +55,11 @@ jobs:
         working-directory: Jenkins-Maven-project/my-webapp
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+        run: mvn -B  verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=rukevweubio_Docker-swarm-Orchestration \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+     
 
       # Login to Docker Hub
       - name: Log in to Docker Hub
