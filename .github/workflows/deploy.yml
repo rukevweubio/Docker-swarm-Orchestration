@@ -6,7 +6,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./kind-kubernates-deployment/Jenkins-Maven-project/my-webapp
+    working-directory: ./Docker-swarm-Orchestration/Jenkins-Maven-project/my-webapp
 
 permissions:
   contents: read
