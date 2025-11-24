@@ -1,0 +1,3 @@
+[submodule "Jenkins-Maven-project"]
+	path = Jenkins-Maven-project
+	url = https://github.com/rukevweubio/Jenkins-Maven-project.git
