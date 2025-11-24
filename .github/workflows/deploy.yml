@@ -6,8 +6,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./Docker-swarm-Orchestration/Jenkins-Maven-project/my-webapp
-
+    working-directory:  Jenkins-Maven-project/my-webapp
 permissions:
   contents: read
 
