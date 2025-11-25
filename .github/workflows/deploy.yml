@@ -50,23 +50,17 @@ jobs:
         working-directory: Jenkins-Maven-project/my-webapp
         run: mvn -B -V verify
 
-      # SonarCloud analysis
-      - name: SonarCloud analysis
-        working-directory: Jenkins-Maven-project/my-webapp
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify sonar:sonar \
-            -Dsonar.projectKey=rukevweubio_Docker-swarm-Orchestration \
-            -Dsonar.organization=rukevweubio \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${SONAR_TOKEN}
-            
+     
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: Jenkins-Maven-project/my-webapp
+          args: >
+            -Dsonar.projectKey=rukevweubio_Docker-swarm-Orchestration
+            -Dsonar.organization=rukevweubio-1
 
 
      
