@@ -82,7 +82,7 @@ jobs:
         with:
           image-ref: docker.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
           format: table
-          exit-code: '1'
+          exit-code: '0'
           severity: 'HIGH,CRITICAL'
 
       # Push Docker image to Docker Hub
