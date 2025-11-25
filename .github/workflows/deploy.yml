@@ -17,7 +17,8 @@ jobs:
 
     steps:
       # Checkout code
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0   # needed for SonarCloud
           submodules: true # if using submodules
@@ -45,25 +46,19 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # Build Maven project
-      - name: Build and run tests (Maven)
+      # Build, test, and run SonarCloud analysis via Maven plugin
+      - name: Build, test, and analyze with SonarCloud
         working-directory: Jenkins-Maven-project/my-webapp
-        run: mvn -B -V verify
-
-     
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: Jenkins-Maven-project/my-webapp
-          args: >
-            -Dsonar.projectKey=rukevweubio_Docker-swarm-Orchestration
-            -Dsonar.organization=rukevweubio-1
-
-
-     
+        run: |
+          mvn -B -V \
+            verify \
+            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=rukevweubio_Docker-swarm-Orchestration \
+            -Dsonar.organization=rukevweubio-1 \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login="${SONAR_TOKEN}"
 
       # Login to Docker Hub
       - name: Log in to Docker Hub
